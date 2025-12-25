@@ -1,0 +1,133 @@
+# YAML配置文件示例
+# 植物病害检测模型配置文件
+
+# ============================================
+# 1. 单模型配置示例
+# ============================================
+# 文件名: model1_config.yaml
+
+input_size: [224, 224]
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+class_names:
+  - healthy
+  - bacterial_spot
+  - early_blight
+  - late_blight
+  - leaf_mold
+  - septoria_leaf_spot
+  - spider_mites
+  - target_spot
+  - yellow_leaf_curl_virus
+  - mosaic_virus
+
+# ============================================
+# 2. 集成模型配置示例
+# ============================================
+# 文件名: ensemble_config.yaml
+
+model_type: ensemble
+model_paths:
+  - model1.pt
+  - model2.pt
+  - model3.pt
+ensemble_strategy: average  # average, weighted, voting
+weights: [0.4, 0.3, 0.3]  # 仅当strategy为weighted时使用
+input_size: [224, 224]
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+class_names:
+  - healthy
+  - disease1
+  - disease2
+  - disease3
+
+# ============================================
+# 3. 蒸馏模型配置示例
+# ============================================
+# 文件名: distillation_config.yaml
+
+model_type: distillation
+student_model_path: student_model.pt
+teacher_model_paths:
+  - teacher_model1.pt
+  - teacher_model2.pt
+use_teacher: false  # 是否使用教师模型辅助
+temperature: 4.0  # 蒸馏温度参数
+input_size: [224, 224]
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+class_names:
+  - healthy
+  - disease1
+  - disease2
+
+# ============================================
+# 4. 加权平均集成模型配置示例
+# ============================================
+# 文件名: weighted_ensemble_config.yaml
+
+model_type: ensemble
+model_paths:
+  - resnet50_model.pt
+  - efficientnet_model.pt
+  - densenet_model.pt
+ensemble_strategy: weighted
+weights: [0.4, 0.35, 0.25]  # 对应三个模型的权重
+input_size: [224, 224]
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+class_names:
+  - healthy
+  - bacterial_spot
+  - early_blight
+  - late_blight
+  - leaf_mold
+
+# ============================================
+# 5. 投票策略集成模型配置示例
+# ============================================
+# 文件名: voting_ensemble_config.yaml
+
+model_type: ensemble
+model_paths:
+  - model1.pt
+  - model2.pt
+  - model3.pt
+  - model4.pt
+  - model5.pt
+ensemble_strategy: voting  # 投票策略
+input_size: [224, 224]
+mean: [0.485, 0.456, 0.406]
+std: [0.229, 0.224, 0.225]
+class_names:
+  - healthy
+  - disease1
+  - disease2
+
+# ============================================
+# 配置说明
+# ============================================
+# 
+# 1. 文件命名规则：
+#    - 单模型: {model_name}_config.yaml
+#    - 集成模型: ensemble_config.yaml
+#    - 蒸馏模型: distillation_config.yaml
+#
+# 2. 支持的格式：
+#    - YAML (.yaml, .yml)
+#    - JSON (.json)
+#
+# 3. 模型路径：
+#    - 可以是绝对路径
+#    - 也可以是相对于配置文件所在目录的相对路径
+#
+# 4. 集成策略：
+#    - average: 平均策略（默认）
+#    - weighted: 加权平均（需要提供weights）
+#    - voting: 投票策略
+#
+# 5. 类别名称：
+#    - 列表格式，按类别ID顺序排列
+#    - 类别ID从0开始
+

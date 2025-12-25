@@ -1,0 +1,61 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+# Alertmanager配置
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: []
+
+# 规则文件配置
+rule_files:
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# 抓取配置
+scrape_configs:
+  # Prometheus自身监控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # API网关监控
+  - job_name: 'api-gateway'
+    static_configs:
+      - targets: ['api-gateway:8000']
+
+  # 用户服务监控
+  - job_name: 'user-service'
+    static_configs:
+      - targets: ['user-service:8001']
+
+  # 模型服务监控
+  - job_name: 'model-service'
+    static_configs:
+      - targets: ['model-service:8002']
+
+  # 任务服务监控
+  - job_name: 'task-service'
+    static_configs:
+      - targets: ['task-service:8003']
+
+  # 缓存服务监控
+  - job_name: 'cache-service'
+    static_configs:
+      - targets: ['cache-service:8004']
+
+  # Redis监控
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # PostgreSQL监控
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+
+  # 前端监控
+  - job_name: 'frontend'
+    static_configs:
+      - targets: ['frontend:3000']

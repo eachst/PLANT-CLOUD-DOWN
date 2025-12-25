@@ -1,0 +1,377 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 248, 250, 252;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 15, 23, 42;
+    --background-end-rgb: 30, 41, 59;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Inter', sans-serif;
+}
+
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 加载动画 */
+.loading-spinner {
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid #3b82f6;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 自定义组件样式 */
+.card {
+  @apply bg-white rounded-lg shadow-soft p-6 transition-all duration-300 hover:shadow-medium;
+}
+
+.btn-primary {
+  @apply bg-primary-500 text-white px-4 py-2 rounded-md hover:bg-primary-600 transition-colors duration-200 font-medium;
+}
+
+.btn-secondary {
+  @apply bg-secondary-100 text-secondary-700 px-4 py-2 rounded-md hover:bg-secondary-200 transition-colors duration-200 font-medium;
+}
+
+.btn-success {
+  @apply bg-success-500 text-white px-4 py-2 rounded-md hover:bg-success-600 transition-colors duration-200 font-medium;
+}
+
+.btn-warning {
+  @apply bg-warning-500 text-white px-4 py-2 rounded-md hover:bg-warning-600 transition-colors duration-200 font-medium;
+}
+
+.btn-error {
+  @apply bg-error-500 text-white px-4 py-2 rounded-md hover:bg-error-600 transition-colors duration-200 font-medium;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 border border-secondary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+}
+
+.text-field {
+  @apply w-full px-3 py-2 border border-secondary-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-y;
+}
+
+/* 响应式工具类 */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* 动画类 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* 通知样式 */
+.notification {
+  @apply fixed top-4 right-4 p-4 rounded-md shadow-hard z-50 max-w-sm;
+}
+
+.notification-success {
+  @apply bg-success-50 border-l-4 border-success-500 text-success-800;
+}
+
+.notification-error {
+  @apply bg-error-50 border-l-4 border-error-500 text-error-800;
+}
+
+.notification-warning {
+  @apply bg-warning-50 border-l-4 border-warning-500 text-warning-800;
+}
+
+.notification-info {
+  @apply bg-primary-50 border-l-4 border-primary-500 text-primary-800;
+}
+
+/* 图像预览样式 */
+.image-preview {
+  @apply relative border-2 border-dashed border-secondary-300 rounded-lg overflow-hidden;
+}
+
+.image-preview-container {
+  @apply flex items-center justify-center h-64 bg-secondary-50;
+}
+
+.image-preview img {
+  @apply max-w-full max-h-full object-contain;
+}
+
+/* 任务状态样式 */
+.status-pending {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-warning-100 text-warning-800;
+}
+
+.status-processing {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800;
+}
+
+.status-completed {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-success-100 text-success-800;
+}
+
+.status-failed {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-error-100 text-error-800;
+}
+
+/* 模型卡片样式 */
+.model-card {
+  @apply bg-white rounded-lg shadow-soft p-4 hover:shadow-medium transition-all duration-300 cursor-pointer;
+}
+
+.model-card.selected {
+  @apply ring-2 ring-primary-500 shadow-medium;
+}
+
+/* 结果展示样式 */
+.result-container {
+  @apply bg-white rounded-lg shadow-soft p-6;
+}
+
+.result-image {
+  @apply w-full rounded-lg overflow-hidden mb-4;
+}
+
+.result-details {
+  @apply space-y-2;
+}
+
+.result-item {
+  @apply flex justify-between items-center py-2 border-b border-secondary-100;
+}
+
+.result-label {
+  @apply font-medium text-secondary-700;
+}
+
+.result-value {
+  @apply text-secondary-900;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  @apply fixed left-0 top-0 h-full w-64 bg-white shadow-hard transform transition-transform duration-300 ease-in-out z-40;
+}
+
+.sidebar.open {
+  @apply translate-x-0;
+}
+
+.sidebar.closed {
+  @apply -translate-x-full;
+}
+
+/* 导航样式 */
+.nav-item {
+  @apply flex items-center px-4 py-3 text-secondary-700 hover:bg-secondary-100 hover:text-primary-600 transition-colors duration-200;
+}
+
+.nav-item.active {
+  @apply bg-primary-50 text-primary-600 border-r-4 border-primary-600;
+}
+
+/* 表格样式 */
+.data-table {
+  @apply w-full bg-white rounded-lg shadow-soft overflow-hidden;
+}
+
+.data-table th {
+  @apply bg-secondary-50 px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider;
+}
+
+.data-table td {
+  @apply px-6 py-4 whitespace-nowrap text-sm text-secondary-900;
+}
+
+.data-table tr:nth-child(even) {
+  @apply bg-secondary-50;
+}
+
+.data-table tr:hover {
+  @apply bg-secondary-100;
+}
+
+/* 分页样式 */
+.pagination {
+  @apply flex items-center justify-between px-4 py-3 bg-white border-t border-secondary-200 sm:px-6;
+}
+
+.pagination-info {
+  @apply text-sm text-secondary-700;
+}
+
+.pagination-nav {
+  @apply flex items-center space-x-2;
+}
+
+.pagination-button {
+  @apply relative inline-flex items-center px-4 py-2 border border-secondary-300 text-sm font-medium rounded-md bg-white text-secondary-500 hover:bg-secondary-50;
+}
+
+.pagination-button.active {
+  @apply z-10 bg-primary-50 border-primary-500 text-primary-600;
+}
+
+.pagination-button:disabled {
+  @apply opacity-50 cursor-not-allowed;
+}
+
+/* 拖拽区域样式 */
+.dropzone {
+  @apply border-2 border-dashed border-secondary-300 rounded-lg p-6 text-center hover:border-primary-500 transition-colors duration-200;
+}
+
+.dropzone.active {
+  @apply border-primary-500 bg-primary-50;
+}
+
+.dropzone.reject {
+  @apply border-error-500 bg-error-50;
+}
+
+/* 工具提示样式 */
+.tooltip {
+  @apply absolute z-10 px-3 py-2 text-sm font-medium text-white bg-secondary-900 rounded-lg shadow-sm opacity-0 tooltip-arrow;
+}
+
+.tooltip.show {
+  @apply opacity-100;
+}
+
+/* 模态框样式 */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-lg shadow-hard p-6 max-w-lg w-full mx-4 max-h-screen overflow-y-auto;
+}
+
+.modal-header {
+  @apply flex items-center justify-between mb-4;
+}
+
+.modal-title {
+  @apply text-lg font-semibold text-secondary-900;
+}
+
+.modal-close {
+  @apply text-secondary-400 hover:text-secondary-600;
+}
+
+.modal-body {
+  @apply mb-4;
+}
+
+.modal-footer {
+  @apply flex justify-end space-x-2;
+}
+
+/* 表单样式 */
+.form-group {
+  @apply mb-4;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-secondary-700 mb-1;
+}
+
+.form-error {
+  @apply text-error-500 text-sm mt-1;
+}
+
+/* 进度条样式 */
+.progress-bar {
+  @apply w-full bg-secondary-200 rounded-full h-2.5;
+}
+
+.progress-fill {
+  @apply bg-primary-500 h-2.5 rounded-full transition-all duration-300;
+}
+
+/* 标签样式 */
+.tag {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.tag-primary {
+  @apply bg-primary-100 text-primary-800;
+}
+
+.tag-secondary {
+  @apply bg-secondary-100 text-secondary-800;
+}
+
+.tag-success {
+  @apply bg-success-100 text-success-800;
+}
+
+.tag-warning {
+  @apply bg-warning-100 text-warning-800;
+}
+
+.tag-error {
+  @apply bg-error-100 text-error-800;
+}
